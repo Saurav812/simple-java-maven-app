@@ -25,7 +25,9 @@ pipeline {
             }
         }
 		stage('Integration Test'){
-			
+			 steps {
+              sh 'mvn test'
+            }
 		
 		}
     }
