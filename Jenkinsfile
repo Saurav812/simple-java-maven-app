@@ -17,25 +17,20 @@ pipeline {
             }
             post {
                 always {
-    
-                  script {
-                      if (currentBuild.currentResult == 'FAILURE') { // Other values: SUCCESS, UNSTABLE
-                          // Send an email only if the build status has changed from green/unstable to red
-                          emailext subject: '$DEFAULT_SUBJECT',
-                              body: '$DEFAULT_CONTENT',
-                              recipientProviders: [
-                                  [$class: 'CulpritsRecipientProvider'],
-                                  [$class: 'DevelopersRecipientProvider'],
-                                  [$class: 'RequesterRecipientProvider']
-                              ],
-                              replyTo: '$DEFAULT_REPLYTO',
-                              to: '$DEFAULT_RECIPIENTS'
+                  junit 'target/surefire-reports/*.xml'
                       }
-                  }
-                }
-
-
             }
+        }
+        stage('Cleanup'){
+        echo 'prune and cleanup'
+        sh 'npm prune'
+        sh 'rm node_modules -rf'
+
+        mail body: 'project build successful',
+                   from: 'sprasad.tech812@gmail.com',
+                   replyTo: 'sprasad.tech812@gmail.com',
+                   subject: 'project build successful',
+                   to: 'sprasad@gmail.com'
         }
     }
 }
