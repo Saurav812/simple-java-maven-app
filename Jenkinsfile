@@ -24,5 +24,9 @@ pipeline {
 
             }
         }
+		stage('Integration Test'){
+			
+		
+		}
     }
 }
