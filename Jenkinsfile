@@ -25,9 +25,12 @@ pipeline {
             }
         }
 		stage('Integration Test'){
-			 steps {
+			 try {
               sh 'mvn test'
-            }
+            }catch(err) {
+        step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
+        throw err
+    }
 		
 		}
     }
