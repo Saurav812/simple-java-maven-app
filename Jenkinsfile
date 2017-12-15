@@ -22,15 +22,17 @@ pipeline {
             }
         }
         stage('Cleanup'){
-        echo 'prune and cleanup'
-        sh 'npm prune'
-        sh 'rm node_modules -rf'
+			steps {
+				echo 'prune and cleanup'
+				sh 'npm prune'
+				sh 'rm node_modules -rf'
 
-        mail body: 'project build successful',
+				mail body: 'project build successful',
                    from: 'sprasad.tech812@gmail.com',
                    replyTo: 'sprasad.tech812@gmail.com',
                    subject: 'project build successful',
                    to: 'sprasad@gmail.com'
         }
+		}
     }
 }
