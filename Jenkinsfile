@@ -18,7 +18,7 @@ pipeline {
             post {
                 always {
                   junit 'target/surefire-reports/*.xml'
-                 
+				  emailext attachLog: true, body: '', subject: 'Failures', to: 'sprasad.tech812@gmail.com'
                 }
 
 
