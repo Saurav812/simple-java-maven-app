@@ -18,20 +18,17 @@ pipeline {
             post {
                 always {
                   junit 'target/surefire-reports/*.xml'
-				  emailext attachLog: true, body: '', subject: 'Failures', to: 'sprasad.tech812@gmail.com'
+				  emailext attachLog: true, body: '', subject: 'Passed', to: 'sprasad.tech812@gmail.com'
                 }
+				
+				failure {
+					junit 'target/surefire-reports/*.xml'
+					emailext attachLog: true, body: '', subject: 'Failures', to: 'sprasad.tech812@gmail.com'
+				}
 
 
             }
         }
-		stage('Integration Test'){
-			 try {
-              sh 'mvn test'
-            }catch(err) {
-        step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
-        throw err
-    }
 		
-		}
     }
 }
