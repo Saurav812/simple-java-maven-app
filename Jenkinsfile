@@ -21,16 +21,7 @@ pipeline {
                       }
             }
         }
-        stage('Cleanup'){
-			steps {
-				echo 'prune and cleanup'
-				
-
-				mail body: 'project build successful',
-                   from: 'sprasad.tech812@gmail.com',
-                   replyTo: 'sprasad.tech812@gmail.com',
-                   subject: 'project build successful',
-                   to: 'sprasad@gmail.com'
+        
         }
 		}
     }
