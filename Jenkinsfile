@@ -20,7 +20,8 @@ pipeline {
                 always {
                   junit '**target/surefire-reports/*.xml'
                   step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xml'])
-                  publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: '/target/surefire-reports/*.xml', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
+                  publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: '**/target/surefire-reports/*.xml', reportFiles: '**/target/surefire-reports/*.xml', reportName: 'HTML Report', reportTitles: ''])
+
 
 
 				  emailext attachLog: true, body: 'This is a test Job ', subject: 'Passed', to: 'sprasad.tech812@gmail.com'
