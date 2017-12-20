@@ -18,13 +18,13 @@ pipeline {
             }
             post {
                 always {
-                  junit '**/target/surefire-reports/*.xml'
+                  //junit '**/target/surefire-reports/*.xml'
                   //step([$class: 'JUnitResultArchiver', testResults: '/target/surefire-reports/*.xml'])
                   emailext attachLog: true, body: 'This is a test Job ', subject: 'Passed', to: 'sprasad.tech812@gmail.com'
                 }
 
 				failure {
-					junit '**/target/surefire-reports/*.xml'
+					//junit '**/target/surefire-reports/*.xml'
 					emailext attachLog: true, body: ' This is a test', subject: 'Failures', to: 'sprasad.tech812@gmail.com'
 
 				}
