@@ -20,7 +20,7 @@ pipeline {
                 always {
                   junit '**target/surefire-reports/*.xml'
                   step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xml'])
-                  step <object of type com.github.terma.jenkins.githubprcoveragestatus.CompareCoverageAction>
+                  
 				  emailext attachLog: true, body: 'This is a test Job ', subject: 'Passed', to: 'sprasad.tech812@gmail.com'
                 }
 
