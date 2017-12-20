@@ -14,13 +14,13 @@ pipeline {
         stage('Test') {
             steps {
               sh 'mvn test'
-              step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xml'])
+              step([$class: 'JUnitResultArchiver', testResults: '/target/surefire-reports/*.xml'])
             }
             post {
                 always {
                   junit '**target/surefire-reports/*.xml'
-                  step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xml'])
-                  publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: '**/target/surefire-reports/*.xml', reportFiles: '**/target/surefire-reports/*.xml', reportName: 'HTML Report', reportTitles: ''])
+                  step([$class: 'JUnitResultArchiver', testResults: '/target/surefire-reports/*.xml'])
+                  publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: true, reportDir: '/target/surefire-reports/*.xml', reportFiles: '/target/surefire-reports/*.xml', reportName: 'HTML Report', reportTitles: ''])
 
 
 
@@ -28,7 +28,7 @@ pipeline {
                 }
 
 				failure {
-					junit '**target/surefire-reports/*.xml'
+					junit 'target/surefire-reports/*.xml'
 					emailext attachLog: true, body: ' This is a test', subject: 'Failures', to: 'sprasad.tech812@gmail.com'
 
 				}
