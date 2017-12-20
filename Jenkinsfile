@@ -14,16 +14,16 @@ pipeline {
         stage('Test') {
             steps {
               sh 'mvn test'
-              step([$class: 'JUnitResultArchiver', testResults: '/target/surefire-reports/*.xm'])
+              step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xm'])
             }
             post {
                 always {
-                  junit 'target/surefire-reports/*.xml'
+                  junit '**target/surefire-reports/*.xml'
 				  emailext attachLog: true, body: 'This is a test Job ${env.JOB_NAME} [${env.BUILD_NUMBER}] Branch [${Branch_Name}] for environment [${environment}]', subject: 'Passed', to: 'sprasad.tech812@gmail.com'
                 }
 
 				failure {
-					junit 'target/surefire-reports/*.xml'
+					junit '**target/surefire-reports/*.xml'
 					emailext attachLog: true, body: ' This is a test', subject: 'Failures', to: 'sprasad.tech812@gmail.com'
 
 				}
