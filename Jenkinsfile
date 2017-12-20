@@ -14,7 +14,7 @@ pipeline {
         stage('Test') {
             steps {
               sh 'mvn test'
-              //step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xml'])
+              step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xml'])
             }
             post {
                 always {
