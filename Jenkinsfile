@@ -48,7 +48,7 @@ pipeline {
       				allowMissing: true,
       				alwaysLinkToLastBuild: false,
       				keepAll: false,
-      				reportDir: 'test/results',
+      				reportDir: '/target/surefire-reports',
       				reportFiles: 'coverage.html',
       				reportName: 'Code Coverage'
       			])
