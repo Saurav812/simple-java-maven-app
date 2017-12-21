@@ -15,6 +15,14 @@ pipeline {
             steps {
               sh 'mvn test'
               step([$class: 'JUnitResultArchiver', testResults: 'target/surefire-reports/*.xml'])
+              parallel (
+                "Firefox" : {
+                  junit 'target/surefire-reports/*.xml'
+                },
+                "Chrome" : {
+                  junit 'target/surefire-reports/*.xml'
+                }
+                )
             }
             post {
                 always {
