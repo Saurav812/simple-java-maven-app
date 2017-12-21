@@ -53,6 +53,18 @@ pipeline {
 
             }
         }
+        stage('Catch/erro') {
+            steps {
+              try {
+                  sh java --version
+              } catch (err) {
+                  echo "Caught: ${err}"
+                  currentBuild.result = 'Failure'
+              }
+              
+            }
+
+        }
 
     }
 }
