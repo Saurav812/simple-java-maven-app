@@ -21,8 +21,8 @@ pipeline {
                   //junit '**/target/surefire-reports/*.xml'
                   // Publish Reports
                   step([$class: 'XUnitBuilder',
-                    thresholds: [[$class: 'FailedThreshold', unstableThreshold: '1']],
-                    tools: [[$class: 'JUnitType', pattern: 'reports/**']]])']]])
+                  thresholds: [[$class: 'FailedThreshold', unstableThreshold: '1']],
+                  tools: [[$class: 'JUnitType', pattern: 'reports/**']]])
 
                   publishHTML([
                     allowMissing: true,
