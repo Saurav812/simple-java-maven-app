@@ -43,15 +43,16 @@ pipeline {
         }
         stage('Reporting') {
           steps {
-            junit "test/results/*.xml"
-      			publishHTML([
+            junit '**/target/surefire-reports/*.xml'
+            // Publish Reports
+            publishHTML([
       				allowMissing: true,
       				alwaysLinkToLastBuild: false,
       				keepAll: false,
-      				reportDir: '/target/surefire-reports',
+      				reportDir: 'target/surefire-reports',
       				reportFiles: 'coverage.html',
-      				reportName: 'Code Coverage'
-      			])
+      				reportName: 'Code Coverage']
+            )
 
           }
         }
