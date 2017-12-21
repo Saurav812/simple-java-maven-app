@@ -59,8 +59,6 @@ pipeline {
                 try {
                     sh java --version
                 }
-              } finally {
-                  echo "THis is correct"
               }
 
             }
