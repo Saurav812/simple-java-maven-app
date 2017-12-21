@@ -28,7 +28,7 @@ pipeline {
                     allowMissing: true,
                     alwaysLinkToLastBuild: true,
                     keepAll: true, reportDir: 'target/surefire-reports',
-                    reportFiles: 'index.html',
+                    reportFiles: '*.xml',
                     reportName: 'Coverage Report',
                     reportTitles: '']
                   )
@@ -36,9 +36,9 @@ pipeline {
                   emailext attachLog: true, body: 'This is a test Job ', subject: 'Passed', to: 'sprasad.tech812@gmail.com'
                 }
 
-				failure {
-					//junit '**/target/surefire-reports/*.xml'
-					emailext attachLog: true, body: ' This is a test', subject: 'Failures', to: 'sprasad.tech812@gmail.com'
+                failure {
+					               //junit '**/target/surefire-reports/*.xml'
+                        emailext attachLog: true, body: ' This is a test', subject: 'Failures', to: 'sprasad.tech812@gmail.com'
 
 				}
 
