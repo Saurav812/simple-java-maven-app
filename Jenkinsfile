@@ -14,20 +14,20 @@ pipeline {
         stage('Test') {
             steps {
               sh 'mvn test'
-              step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xml'])
+              step([$class: 'JUnitResultArchiver', testResults: 'target/surefire-reports/*.xml'])
             }
             post {
                 always {
-                  junit '**/target/surefire-reports/*.xml'
+                  junit 'target/surefire-reports/*.xml'
                   // Publish Reports
                   step([$class: 'XUnitBuilder',
                   thresholds: [[$class: 'FailedThreshold', unstableThreshold: '1']],
-                  tools: [[$class: 'JUnitType', pattern: '/target/surefire-reports/**']]])
+                  tools: [[$class: 'JUnitType', pattern: 'target/surefire-reports/**']]])
 
                   publishHTML([
                     allowMissing: true,
                     alwaysLinkToLastBuild: true,
-                    keepAll: true, reportDir: '/target/surefire-reports',
+                    keepAll: true, reportDir: 'target/surefire-reports',
                     reportFiles: 'index.html',
                     reportName: 'Coverage Report',
                     reportTitles: '']
