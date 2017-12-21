@@ -53,15 +53,16 @@ pipeline {
 
             }
         }
-        stage('Catch/erro') {
+        stage('Test') {
             steps {
-              try {
-                  sh java --version
-              } catch (err) {
-                  echo "Caught: ${err}"
-                  currentBuild.result = 'Failure'
+              script {
+                try {
+                    sh java --version
+                }
+              } finally {
+                  echo "THis is correct"
               }
-              
+
             }
 
         }
