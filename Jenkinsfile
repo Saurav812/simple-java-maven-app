@@ -13,8 +13,8 @@ pipeline {
 		}
         stage('Test') {
             steps {
-              sh 'mvn test'
-              step([$class: 'JUnitResultArchiver', testResults: 'target/surefire-reports/*.xml'])
+              //sh 'mvn test'
+              //step([$class: 'JUnitResultArchiver', testResults: 'target/surefire-reports/*.xml'])
               parallel (
                 "Firefox" : {
                   junit 'target/surefire-reports/*.xml'
