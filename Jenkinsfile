@@ -18,7 +18,16 @@ pipeline {
             }
             post {
                 always {
-                  //junit '**/target/surefire-reports/*.xml'
+                  junit '**/target/surefire-reports/*.xml'
+                  // Publish Reports
+                  publishHTML([
+                    allowMissing: true,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true, reportDir: '/target/surefire-reports',
+                    reportFiles: 'index.html',
+                    reportName: 'Coverage Report',
+                    reportTitles: '']
+                  )
                   //step([$class: 'JUnitResultArchiver', testResults: '/target/surefire-reports/*.xml'])
                   emailext attachLog: true, body: 'This is a test Job ', subject: 'Passed', to: 'sprasad.tech812@gmail.com'
                 }
