@@ -53,17 +53,15 @@ pipeline {
 
             }
         }
-        stage('Test') {
-            steps {
-              script {
+        stage('Example') {
                 try {
-                    sh java --version
+                    sh 'exit 1'
                 }
-              }
-
+                catch (exc) {
+                    echo 'Something failed, I should sound the klaxons!'
+                    throw
+                }
             }
-
-        }
 
     }
 }
