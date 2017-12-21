@@ -51,7 +51,7 @@ pipeline {
               keepAll: true, reportDir: '/target/surefire-reports',
               reportFiles: 'index.html',
               reportName: 'Coverage Report',
-              reportTitles: '']
+              reportTitles: 'Code Report']
             )
 
           }
