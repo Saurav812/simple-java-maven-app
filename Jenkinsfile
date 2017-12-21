@@ -22,7 +22,7 @@ pipeline {
                   // Publish Reports
                   step([$class: 'XUnitBuilder',
                   thresholds: [[$class: 'FailedThreshold', unstableThreshold: '1']],
-                  tools: [[$class: 'JUnitType', pattern: 'reports/**']]])
+                  tools: [[$class: 'JUnitType', pattern: '/target/surefire-reports/**']]])
 
                   publishHTML([
                     allowMissing: true,
