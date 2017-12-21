@@ -51,7 +51,7 @@ pipeline {
       				keepAll: false,
       				reportDir: 'test/results',
       				reportFiles: 'coverage.html',
-      				reportName: 'Code Coverage'
+      				reportName: 'Code Coverage',
               reportTitles: '']
             )
 
