@@ -47,11 +47,11 @@ pipeline {
             // Publish Reports
             publishHTML([
               allowMissing: true,
-              alwaysLinkToLastBuild: true,
-              keepAll: true, reportDir: '/target/surefire-reports',
-              reportFiles: 'index.html',
-              reportName: 'Coverage Report',
-              reportTitles: 'Code Report']
+      				alwaysLinkToLastBuild: false,
+      				keepAll: false,
+      				reportDir: 'test/results',
+      				reportFiles: 'coverage.html',
+      				reportName: 'Code Coverage']
             )
 
           }
