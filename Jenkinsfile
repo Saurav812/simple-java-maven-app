@@ -46,12 +46,12 @@ pipeline {
             junit '**/target/surefire-reports/*.xml'
             // Publish Reports
             publishHTML([
-      				allowMissing: true,
-      				alwaysLinkToLastBuild: false,
-      				keepAll: false,
-      				reportDir: 'target/surefire-reports',
-      				reportFiles: 'coverage.html',
-      				reportName: 'Code Coverage']
+              allowMissing: true,
+              alwaysLinkToLastBuild: true,
+              keepAll: true, reportDir: '/target/surefire-reports',
+              reportFiles: 'index.html',
+              reportName: 'Coverage Report',
+              reportTitles: '']
             )
 
           }
