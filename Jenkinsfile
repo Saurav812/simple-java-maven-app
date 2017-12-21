@@ -18,7 +18,7 @@ pipeline {
             }
             post {
                 always {
-                  //junit '**/target/surefire-reports/*.xml'
+                  junit '**/target/surefire-reports/*.xml'
                   // Publish Reports
                   step([$class: 'XUnitBuilder',
                   thresholds: [[$class: 'FailedThreshold', unstableThreshold: '1']],
