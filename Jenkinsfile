@@ -49,20 +49,7 @@ pipeline {
                         emailext attachLog: true, body: ' This is a test', subject: 'Failures', to: 'sprasad.tech812@gmail.com'
 
 				}
-
-
             }
         }
-        stage('Example') {
-          steps {
-            if (env.BRANCH_NAME == 'master') {
-                echo 'I only execute on the master branch'
-            } else {
-              s  echo 'I execute elsewhere'
-            }
-          }
-
-      }
-
     }
 }
