@@ -9,6 +9,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
+                script {
                 try {
                     // run tests in the same workspace that the project was built
                     sh 'mvn test'
@@ -22,6 +23,7 @@ pipeline {
                     cleanWs cleanWhenFailure: false
                 }
         }
+      }
 		}
 
         stage('Test') {
