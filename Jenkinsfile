@@ -23,7 +23,7 @@ pipeline {
                     // if the build has failed, the workspace will be kept
                     //cleanWs cleanWhenFailure: false
                     emailext attachLog: true, body: 'This is a test Job ', subject: 'Passed', to: 'sprasad.tech812@gmail.com'
-                //}
+                }
         }
       }
 		}
