@@ -18,10 +18,11 @@ pipeline {
                     currentBuild.result = 'success'
                     throw e
                     emailext attachLog: true, body: 'This is a test Job ', subject: 'Passed', to: 'sprasad.tech812@gmail.com'
-                } //finally {
+                } finally {
                     // perform workspace cleanup only if the build have passed
                     // if the build has failed, the workspace will be kept
                     //cleanWs cleanWhenFailure: false
+                    emailext attachLog: true, body: 'This is a test Job ', subject: 'Passed', to: 'sprasad.tech812@gmail.com'
                 //}
         }
       }
