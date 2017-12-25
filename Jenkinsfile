@@ -15,7 +15,7 @@ pipeline {
                     sh 'mvn -B -DskipTests clean package'
                 } catch (e) {
                     // if any exception occurs, mark the build as failed
-                    currentBuild.result = 'FAILURE'
+                    currentBuild.result = 'success'
                     throw e
                     step([$class: 'Mailer', recipients: 'sprasad.tech812@gmail.com'])
                 } //finally {
