@@ -15,14 +15,14 @@ pipeline {
                     sh 'mvn -B -DskipTests clean package'
                 } catch (e) {
                     // if any exception occurs, mark the build as failed
-                    currentBuild.result = 'success'
+                    currentBuild.result = 'FAILURE'
                     throw e
-                    emailext attachLog: true, body: 'This is a test Job ', subject: 'Passed', to: 'sprasad.tech812@gmail.com'
+
                 } finally {
                     // perform workspace cleanup only if the build have passed
                     // if the build has failed, the workspace will be kept
                     //cleanWs cleanWhenFailure: false
-                    emailext attachLog: true, body: 'This is a test Job ', subject: 'Passed', to: 'sprasad.tech812@gmail.com'
+                    emailext attachLog: true, body: 'This is a test Job ', subject: 'FAILED', to: 'sprasad.tech812@gmail.com'
                 }
         }
       }
@@ -36,7 +36,7 @@ pipeline {
                 } catch (e) {
                     currentBuild.result = 'FAILURE'
                   throw e
-                    step([$class: 'Mailer', recipients: 'sprasad.tech812@gmail.com'])
+
                 }
               }
 
