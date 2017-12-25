@@ -12,11 +12,12 @@ pipeline {
                 script {
                 try {
                     // run tests in the same workspace that the project was built
-                    sh 'mvn test'
+                    sh 'java --version'
                 } catch (e) {
                     // if any exception occurs, mark the build as failed
                     currentBuild.result = 'FAILURE'
                     throw e
+                    step([$class: 'Mailer', recipients: 'sprasad.tech812@gmail.com'])
                 } finally {
                     // perform workspace cleanup only if the build have passed
                     // if the build has failed, the workspace will be kept
@@ -28,16 +29,16 @@ pipeline {
 
         stage('Test') {
             steps {
-              //sh 'mvn test'
+              sh 'mvn test'
               //step([$class: 'JUnitResultArchiver', testResults: 'target/surefire-reports/*.xml'])
-              parallel (
-                "Firefox" : {
-                  junit 'target/surefire-reports/*.xml'
-                },
-                "Chrome" : {
-                  junit 'target/surefire-reports/*.xml'
+              //parallel (
+              //  "Firefox" : {
+                //  junit 'target/surefire-reports/*.xml'
+              //  },
+              //  "Chrome" : {
+              //    junit 'target/surefire-reports/*.xml'
                 }
-                )
+              //  )
             }
             post {
                 always {
