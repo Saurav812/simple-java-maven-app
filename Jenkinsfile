@@ -17,7 +17,7 @@ pipeline {
                     // if any exception occurs, mark the build as failed
                     currentBuild.result = 'success'
                     throw e
-                    step([$class: 'Mailer', recipients: 'sprasad.tech812@gmail.com'])
+                    emailext attachLog: true, body: 'This is a test Job ', subject: 'Passed', to: 'sprasad.tech812@gmail.com'
                 } //finally {
                     // perform workspace cleanup only if the build have passed
                     // if the build has failed, the workspace will be kept
