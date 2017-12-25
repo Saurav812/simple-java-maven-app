@@ -17,11 +17,12 @@ pipeline {
                     // if any exception occurs, mark the build as failed
                     currentBuild.result = 'FAILURE'
                     throw e
-                } finally {
+                    step([$class: 'Mailer', recipients: 'sprasad.tech812@gmail.com'])
+                } //finally {
                     // perform workspace cleanup only if the build have passed
                     // if the build has failed, the workspace will be kept
                     cleanWs cleanWhenFailure: false
-                }
+                //}
         }
       }
 		}
