@@ -50,6 +50,34 @@ pipeline {
                 }
               //  )
             }
+            post {
+                always {
+                        junit 'target/surefire-reports/*.xml'
+                        // Publish Reports
+                        step([$class: 'XUnitBuilder',
+                        thresholds: [[$class: 'FailedThreshold', unstableThreshold: '1']],
+                        tools: [[$class: 'JUnitType', pattern: 'target/surefire-reports/**']]])
+
+                        publishHTML([
+                          allowMissing: true,
+                          alwaysLinkToLastBuild: true,
+                          keepAll: true, reportDir: 'target/surefire-reports',
+                          reportFiles: '*.xml',
+                          reportName: 'Coverage Report',
+                          reportTitles: '']
+                )
+                        //Sending an email
+                        emailext attachLog: true, body: 'This is a test Job ', subject: 'Passed', to: 'sprasad.tech812@gmail.com'
+              }
+
+                failure {
+                        //TODO_1st - notify users when the Pipeline fails
+            			    	emailext attachLog: true, body: '', subject: 'Failures', to: 'sprasad.tech812@gmail.com'
+                }
+
+      			}
+
+
           //  post {
               //  always {
                 //    step([$class: 'XUnitBuilder',thresholds: [ [$class: 'SkippedThreshold', failureThreshold: '0'], [$class: 'FailedThreshold', failureThreshold: '10']], tools: [[$class: 'JUnitType', pattern: 'reports/**']]])step([$class: 'XUnitBuilder',thresholds: [ [$class: 'SkippedThreshold', failureThreshold: '0'], [$class: 'FailedThreshold', failureThreshold: '10']], tools: [[$class: 'JUnitType', pattern: 'reports/**']]])
