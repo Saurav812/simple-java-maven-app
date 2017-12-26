@@ -54,11 +54,11 @@ pipeline {
                 always {
                         //junit 'target/surefire-reports/*.xml'
                         // Publish Reports
-                        step([$class: 'XUnitBuilder', testTimeMargin: '3000',
+                        step([$class: 'XUnitPublisher', testTimeMargin: '3000',
                         thresholdMode: 1, thresholds: [[$class: 'FailedThreshold',
                         failureNewThreshold: '7', failureThreshold: '7', unstableNewThreshold: '10',
                         unstableThreshold: '10'], [$class: 'SkippedThreshold', failureNewThreshold: '6',
-                        failureThreshold: '6', unstableNewThreshold: '7', unstableThreshold: '8']]])
+                        failureThreshold: '6', unstableNewThreshold: '8', unstableThreshold: '8']]])
 
                         publishHTML([
                           allowMissing: true,
