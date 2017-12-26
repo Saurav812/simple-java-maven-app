@@ -107,8 +107,8 @@ pipeline {
                 //  }
         //}
 
-        post {
-          cleanWs cleanWhenAborted: false, cleanWhenFailure: false, cleanWhenNotBuilt: false, cleanWhenUnstable: false
-        }
+      //  post {
+      //    cleanWs cleanWhenAborted: false, cleanWhenFailure: false, cleanWhenNotBuilt: false, cleanWhenUnstable: false
+      //  }
 }
 }
