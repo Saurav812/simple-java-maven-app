@@ -17,7 +17,6 @@ pipeline {
                     // if any exception occurs, mark the build as failed
                     currentBuild.result = 'FAILURE'
                     throw e
-
                 } finally {
                     // perform workspace cleanup only if the build have passed
                     // if the build has failed, the workspace will be kept
@@ -53,9 +52,17 @@ pipeline {
             post {
                 always {
                         //junit 'target/surefire-reports/*.xml'
-                        step([$class: 'XUnitBuilder', thresholds: [[$class: 'FailedThreshold', 
-                        unstableThreshold: '1']],tools: [[$class: 'JUnitType', pattern: 'target/surefire-reports/**']]])
-
+                        script {
+                            try {
+                              step([$class: 'XUnitBuilder', thresholds: [[$class: 'FailedThreshold',
+                              unstableThreshold: '1']],tools: [[$class: 'JUnitType', pattern: 'target/surefire-reports/**']]])
+                            } catch (e) {
+                                currentBuild.result = 'SUCCESS'
+                              throw e
+                            } finally {
+                              emailext attachLog: true, body: 'Unit Test has passed ', subject: 'SUCCESS', to: 'sprasad.tech812@gmail.com'
+                            }
+                        }
                         publishHTML([
                           allowMissing: true,
                           alwaysLinkToLastBuild: true,
@@ -64,8 +71,7 @@ pipeline {
                           reportName: 'Coverage Report',
                           reportTitles: '']
                                     )
-                        //Sending an email
-                        emailext attachLog: true, body: 'This is a test Job ', subject: 'Passed', to: 'sprasad.tech812@gmail.com'
+                        
               }
 
                 failure {
