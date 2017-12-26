@@ -22,7 +22,7 @@ pipeline {
                     // perform workspace cleanup only if the build have passed
                     // if the build has failed, the workspace will be kept
                     //cleanWs cleanWhenFailure: false
-                    emailext attachLog: true, body: 'This is a test Job ', subject: 'FAILED', to: 'sprasad.tech812@gmail.com'
+                    emailext attachLog: true, body: 'Build has failed ', subject: 'FAILED', to: 'sprasad.tech812@gmail.com'
                 }
         }
       }
@@ -36,8 +36,8 @@ pipeline {
                 } catch (e) {
                     currentBuild.result = 'FAILURE'
                   throw e
-
                 }
+
               }
 
               //step([$class: 'JUnitResultArchiver', testResults: 'target/surefire-reports/*.xml'])
@@ -54,9 +54,11 @@ pipeline {
                 always {
                         //junit 'target/surefire-reports/*.xml'
                         // Publish Reports
-                        step([$class: 'XUnitBuilder',thresholds: [ [$class: 'SkippedThreshold', failureThreshold: '0'],
-                        [$class: 'FailedThreshold', failureThreshold: '10']],
-                        tools: [[$class: 'JUnitType', pattern: 'reports/**']]])
+                        step([$class: 'XUnitBuilder', testTimeMargin: '3000',
+                        thresholdMode: 1, thresholds: [[$class: 'FailedThreshold',
+                        failureNewThreshold: '7', failureThreshold: '7', unstableNewThreshold: '10',
+                        unstableThreshold: '10'], [$class: 'SkippedThreshold', failureNewThreshold: '7',
+                        failureThreshold: '7', unstableNewThreshold: '10', unstableThreshold: '10']]])
 
                         publishHTML([
                           allowMissing: true,
