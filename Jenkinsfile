@@ -58,7 +58,8 @@ pipeline {
                         thresholdMode: 1, thresholds: [[$class: 'FailedThreshold',
                         failureNewThreshold: '7', failureThreshold: '7', unstableNewThreshold: '10',
                         unstableThreshold: '10'], [$class: 'SkippedThreshold', failureNewThreshold: '6',
-                        failureThreshold: '6', unstableNewThreshold: '8', unstableThreshold: '8']]])
+                        failureThreshold: '6', unstableNewThreshold: '8', unstableThreshold: '8']],
+                        tools: [[$class: 'JUnitType', pattern: 'reports/**']]])
 
                         publishHTML([
                           allowMissing: true,
