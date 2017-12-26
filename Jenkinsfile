@@ -53,22 +53,8 @@ pipeline {
             post {
                 always {
                         //junit 'target/surefire-reports/*.xml'
-                        // Publish Reports
-                        step([
-                            $class: 'XUnitBuilder', testTimeMargin: '3000', thresholdMode: 1,
-                            thresholds: [
-                                [$class: 'FailedThreshold', failureNewThreshold: '', failureThreshold: '0', unstableNewThreshold: '', unstableThreshold: ''],
-                                [$class: 'SkippedThreshold', failureNewThreshold: '', failureThreshold: '', unstableNewThreshold: '', unstableThreshold: '']
-                            ],
-                            tools: [[
-                                $class: 'UnitTestJunitHudsonTestType',
-                                deleteOutputFiles: true,
-                                failIfNotNew: true,
-                                pattern: 'target/surefire-reports/*.xml',
-                                skipNoTestFiles: false,
-                                stopProcessingIfError: true
-                            ]]
-                        ])
+                        step([$class: 'XUnitBuilder', thresholds: [[$class: 'FailedThreshold', 
+                        unstableThreshold: '1']],tools: [[$class: 'JUnitType', pattern: 'target/surefire-reports/**']]])
 
                         publishHTML([
                           allowMissing: true,
@@ -77,7 +63,7 @@ pipeline {
                           reportFiles: '*.xml',
                           reportName: 'Coverage Report',
                           reportTitles: '']
-                )
+                                    )
                         //Sending an email
                         emailext attachLog: true, body: 'This is a test Job ', subject: 'Passed', to: 'sprasad.tech812@gmail.com'
               }
