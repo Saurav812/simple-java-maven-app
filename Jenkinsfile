@@ -64,7 +64,7 @@ pipeline {
                                 $class: 'UnitTestJunitHudsonTestType',
                                 deleteOutputFiles: true,
                                 failIfNotNew: true,
-                                pattern: 'result.xml',
+                                pattern: 'target/surefire-reports/*.xml',
                                 skipNoTestFiles: false,
                                 stopProcessingIfError: true
                             ]]
