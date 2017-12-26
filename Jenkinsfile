@@ -52,16 +52,16 @@ pipeline {
 
             post {
                 always {
-                        junit 'target/surefire-reports/*.xml'
+                        //junit 'target/surefire-reports/*.xml'
                         // Publish Reports
-                        step([$class: 'XUnitBuilder',
-                        thresholds: [[$class: 'FailedThreshold', unstableThreshold: '1']],
-                        tools: [[$class: 'JUnitType', pattern: 'target/surefire-reports/**']]])
+                        step([$class: 'XUnitBuilder',thresholds: [ [$class: 'SkippedThreshold', failureThreshold: '0'],
+                        [$class: 'FailedThreshold', failureThreshold: '10']],
+                        tools: [[$class: 'JUnitType', pattern: 'reports/**']]])
 
                         publishHTML([
                           allowMissing: true,
                           alwaysLinkToLastBuild: true,
-                          keepAll: true, reportDir: 'target/surefire-reports',
+                          keepAll: true, reportDir: 'reports/',
                           reportFiles: '*.xml',
                           reportName: 'Coverage Report',
                           reportTitles: '']
