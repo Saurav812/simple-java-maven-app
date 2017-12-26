@@ -5,6 +5,10 @@ pipeline {
             args '-v /root/.m2:/root/.m2'
         }
     }
+
+    define {
+      def 
+    }
     stages {
         stage('Build') {
             steps {
@@ -14,7 +18,7 @@ pipeline {
                     // run tests in the same workspace that the project was built
                     echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
                     dir ('test') {
-                        sh 'mvn -B -DskipTests clean package'  
+                        sh 'mvn -B -DskipTests clean package'
                     }
 
                 } catch (e) {
