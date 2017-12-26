@@ -71,15 +71,9 @@ pipeline {
                           reportName: 'Coverage Report',
                           reportTitles: '']
                                     )
-                        
-              }
 
-                failure {
-                        //TODO_1st - notify users when the Pipeline fails
-            			    	emailext attachLog: true, body: '', subject: 'Failures', to: 'sprasad.tech812@gmail.com'
-                }
-
-      			}
+                        }
+                  }
 
           }
           //  post {
@@ -111,5 +105,8 @@ pipeline {
                 //  }
         //}
 
+        post {
+          cleanWs cleanWhenAborted: false, cleanWhenFailure: false, cleanWhenNotBuilt: false, cleanWhenUnstable: false
+        }
 }
 }
