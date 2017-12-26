@@ -54,14 +54,21 @@ pipeline {
                 always {
                         //junit 'target/surefire-reports/*.xml'
                         // Publish Reports
-                        step([$class: 'XUnitBuilder',
+                        step([
+                            $class: 'XUnitBuilder', testTimeMargin: '3000', thresholdMode: 1,
                             thresholds: [
-                                [$class: 'SkippedThreshold', failureThreshold: '0'],
-                                // Allow for a significant number of failures
-                                // Keeping this threshold so that overwhelming failures are guaranteed
-                                //     to still fail the build
-                                [$class: 'FailedThreshold', failureThreshold: '10']],
-                            tools: [[$class: 'JUnitType', pattern: 'reports/**']]])
+                                [$class: 'FailedThreshold', failureNewThreshold: '', failureThreshold: '0', unstableNewThreshold: '', unstableThreshold: ''],
+                                [$class: 'SkippedThreshold', failureNewThreshold: '', failureThreshold: '', unstableNewThreshold: '', unstableThreshold: '']
+                            ],
+                            tools: [[
+                                $class: 'UnitTestJunitHudsonTestType',
+                                deleteOutputFiles: true,
+                                failIfNotNew: true,
+                                pattern: 'result.xml',
+                                skipNoTestFiles: false,
+                                stopProcessingIfError: true
+                            ]]
+                        ])
 
                         publishHTML([
                           allowMissing: true,
