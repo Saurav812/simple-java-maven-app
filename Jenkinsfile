@@ -13,7 +13,10 @@ pipeline {
                 try {
                     // run tests in the same workspace that the project was built
                     echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-                    sh 'mvn -B -DskipTests clean package'
+                    dir ('test') {
+                        sh 'mvn -B -DskipTests clean package'  
+                    }
+
                 } catch (e) {
                     // if any exception occurs, mark the build as failed
                     currentBuild.result = 'FAILURE'
