@@ -50,8 +50,9 @@ pipeline {
                 }
               //  )
             }
-            //post {
-              //  always {
+            post {
+                always {
+                    step([$class: 'XUnitBuilder',thresholds: [ [$class: 'SkippedThreshold', failureThreshold: '0'], [$class: 'FailedThreshold', failureThreshold: '10']], tools: [[$class: 'JUnitType', pattern: 'reports/**']]])step([$class: 'XUnitBuilder',thresholds: [ [$class: 'SkippedThreshold', failureThreshold: '0'], [$class: 'FailedThreshold', failureThreshold: '10']], tools: [[$class: 'JUnitType', pattern: 'reports/**']]])
                 //  junit 'target/surefire-reports/*.xml'
                   // Publish Reports
                 //  step([$class: 'XUnitBuilder',
