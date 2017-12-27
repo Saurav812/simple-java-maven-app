@@ -6,9 +6,6 @@ pipeline {
         }
     }
 
-    define {
-      def
-    }
     stages {
         stage('Build') {
             steps {
