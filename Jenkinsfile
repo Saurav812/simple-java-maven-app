@@ -90,9 +90,9 @@ pipeline {
                         echo "Details of the ${env.tomcat_hostname}"
                       //  sshagent(['7c315e58-66b9-47bd-a49d-dc7c2cae1d98']) {
                         //sh 'cp ${WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar http://ec2-54-159-172-184.compute-1.amazonaws.com:8080/'
-                        deploy(war: ${WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar, url: 'http://ec2-54-159-172-184.compute-1.amazonaws.com:8080',
-                          path: '/opt/tomcat/webapps', username: 'admin', password: 'admin')
-                        curl --upload-file '${WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar' http://admin:admin@ec2-54-159-172-184.compute-1.amazonaws.com:8080/manager/text/deploy?path=/opt/tomcat/webapps&update=true
+                        //deploy(war: ${WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar, url: 'http://ec2-54-159-172-184.compute-1.amazonaws.com:8080',
+                      //    path: '/opt/tomcat/webapps', username: 'admin', password: 'admin')
+                        //curl --upload-file '${WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar' http://admin:admin@ec2-54-159-172-184.compute-1.amazonaws.com:8080/manager/text/deploy?path=/opt/tomcat/webapps&update=true
 
                   //}
                                                    }
