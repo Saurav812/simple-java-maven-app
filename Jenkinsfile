@@ -93,7 +93,7 @@ pipeline {
                         deploy(war: ${WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar, url: 'http://ec2-54-159-172-184.compute-1.amazonaws.com:8080',
                           path: '/opt/tomcat/webapps', username: 'admin', password: 'admin')
 
-                  }
+                  //}
                                                    }
                       }
                                     }
