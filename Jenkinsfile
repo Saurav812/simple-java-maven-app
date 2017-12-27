@@ -83,8 +83,12 @@ pipeline {
 
           }
 
-          //stage('Deploy to Tomcat') {
-
-          //}
+          stage('Deploy to Tomcat') {
+                steps {
+                      sshagent(['CREDENTIALS_ID']) {
+                          sh '/target/my-app-1.0-SNAPSHOT.jar http://ec2-54-159-172-184.compute-1.amazonaws.com:8080/TOMCAT/webapps/'
+                                                   }
+                      }
+                                    }
 }
 }
