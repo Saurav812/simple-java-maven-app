@@ -60,6 +60,7 @@ pipeline {
                         //junit 'target/surefire-reports/*.xml'
                         script {
                             try {
+                              step([$class: 'JUnitResultArchiver', testResults: 'target/surefire-reports/*.xml'])
                               step([$class: 'XUnitBuilder', thresholds: [[$class: 'FailedThreshold',
                               unstableThreshold: '1']],tools: [[$class: 'JUnitType', pattern: '/target/surefire-reports/**']]])
                             } catch (e) {
