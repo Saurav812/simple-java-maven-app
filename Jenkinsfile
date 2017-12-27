@@ -89,7 +89,7 @@ pipeline {
                   script {
                         echo "Details of the ${env.tomcat_hostname}"
                         sshagent(['7c315e58-66b9-47bd-a49d-dc7c2cae1d98']) {
-                        sh 'cp ${WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar http://ec2-54-159-172-184.compute-1.amazonaws.com:8080/TOMCAT/webapps/'
+                        sh 'cp ${WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar ${env.tomcat_hostname}:8080/sample/'
 
                   }
                                                    }
