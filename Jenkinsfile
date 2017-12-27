@@ -61,7 +61,7 @@ pipeline {
                         script {
                             try {
                               step([$class: 'XUnitBuilder', thresholds: [[$class: 'FailedThreshold',
-                              unstableThreshold: '1']],tools: [[$class: 'JUnitType', pattern: 'target/surefire-reports/**']]])
+                              unstableThreshold: '1']],tools: [[$class: 'JUnitType', pattern: '/target/surefire-reports/**']]])
                             } catch (e) {
                                 currentBuild.result = 'SUCCESS'
                               throw e
