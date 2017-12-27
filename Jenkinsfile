@@ -92,6 +92,7 @@ pipeline {
                         //sh 'cp ${WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar http://ec2-54-159-172-184.compute-1.amazonaws.com:8080/'
                         deploy(war: ${WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar, url: 'http://ec2-54-159-172-184.compute-1.amazonaws.com:8080',
                           path: '/opt/tomcat/webapps', username: 'admin', password: 'admin')
+                        curl --upload-file '${WORKSPACE}/target/my-app-1.0-SNAPSHOT.jar' http://admin:admin@ec2-54-159-172-184.compute-1.amazonaws.com:8080/manager/text/deploy?path=/opt/tomcat/webapps&update=true
 
                   //}
                                                    }
