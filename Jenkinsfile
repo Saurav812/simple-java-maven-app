@@ -83,8 +83,8 @@ pipeline {
 
           }
 
-          stage('Deploy to Tomcat') {
+          //stage('Deploy to Tomcat') {
 
-          }
+          //}
 }
 }
