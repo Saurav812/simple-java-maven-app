@@ -7,7 +7,7 @@ pipeline {
     }
 
     define {
-      def 
+      def
     }
     stages {
         stage('Build') {
@@ -85,37 +85,9 @@ pipeline {
                   }
 
           }
-          //  post {
-              //  always {
-                //    step([$class: 'XUnitBuilder',thresholds: [ [$class: 'SkippedThreshold', failureThreshold: '0'], [$class: 'FailedThreshold', failureThreshold: '10']], tools: [[$class: 'JUnitType', pattern: 'reports/**']]])step([$class: 'XUnitBuilder',thresholds: [ [$class: 'SkippedThreshold', failureThreshold: '0'], [$class: 'FailedThreshold', failureThreshold: '10']], tools: [[$class: 'JUnitType', pattern: 'reports/**']]])
-                //  junit 'target/surefire-reports/*.xml'
-                  // Publish Reports
-                //  step([$class: 'XUnitBuilder',
-                //  thresholds: [[$class: 'FailedThreshold', unstableThreshold: '1']],
-                //  tools: [[$class: 'JUnitType', pattern: 'target/surefire-reports/**']]])
 
-                //  publishHTML([
-                //    allowMissing: true,
-                  //  alwaysLinkToLastBuild: true,
-                  //  keepAll: true, reportDir: 'target/surefire-reports',
-                //    reportFiles: '*.xml',
-                  //  reportName: 'Coverage Report',
-                //    reportTitles: '']
-                //  )
-                  //step([$class: 'JUnitResultArchiver', testResults: '/target/surefire-reports/*.xml'])
-              //    emailext attachLog: true, body: 'This is a test Job ', subject: 'Passed', to: 'sprasad.tech812@gmail.com'
-                //      }
+          stage('Deploy to Tomcat') {
 
-              //  failure {
-					               //junit '**/target/surefire-reports/*.xml'
-              //          emailext attachLog: true, body: ' This is a test', subject: 'Failures', to: 'sprasad.tech812@gmail.com'
-
-				        //        }
-                //  }
-        //}
-
-      //  post {
-      //    cleanWs cleanWhenAborted: false, cleanWhenFailure: false, cleanWhenNotBuilt: false, cleanWhenUnstable: false
-      //  }
+          }
 }
 }
